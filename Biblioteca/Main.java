@@ -1,23 +1,35 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
+		Scanner entrada = new Scanner(System.in);
+		int[] codigos = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		System.out.println("Digite o RA do aluno: ");
+		String RA = entrada.nextLine();
+		System.out.println("Digite o numero de livros que deseja emprestar: ");
+		int num = entrada.nextInt();
+		int aux;
+		for(int i = 0; i < num; i++){
+			System.out.println("Digite o codigo do livro: ");
+			aux = entrada.nextInt();
+			codigos[i] = aux;
+		}
+		
+		Controle controle = new Controle();
+		controle.emprestar(RA, num, codigos);
+		
+		entrada.close();
+		
 		Emprestimo e = new Emprestimo();
-
-		Livro l1 = new Livro(1);
 		
-		Livro l2 = new Livro(2);
-		
-		 Livro l3 = new Livro(3); 
-		
-		Item i1 = new Item(l1);
-		Item i2 = new Item(l2);
-		Item i3 = new Item(l3);
-		e.i.add(i1);
-		e.i.add(i2);
-		e.i.add(i3);
+		for(int j = 0; j < num; j++){
+			Livro l = new Livro(codigos[j]);
+			Item i = new Item(l);
+			e.i.add(i);
+		}
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		

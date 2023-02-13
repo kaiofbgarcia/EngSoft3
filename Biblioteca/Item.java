@@ -43,3 +43,16 @@ public class Item {
 	}
 		
 }
+
+@Test
+public void testCalculaDataDevolucao() {
+  Date data = new Date();
+  Livro livro = new Livro(10, "Title");
+  Item item = new Item(livro);
+  Date dateDevolucao = item.calculaDataDevolucao(data);
+  Calendar calendar = Calendar.getInstance();
+  calendar.setTime(data);
+  calendar.add(Calendar.DAY_OF_MONTH, livro.verPrazo());
+  Date expectedResult = calendar.getTime();
+  assertEquals(expectedResult, dateDevolucao);
+}

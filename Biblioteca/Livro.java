@@ -8,7 +8,5 @@ public class Livro {
 	public int verPrazo() {
 		return titulo.getPrazo();
 	}
-
-	
 }
 

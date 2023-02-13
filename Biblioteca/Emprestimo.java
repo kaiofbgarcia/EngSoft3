@@ -16,17 +16,16 @@ public class Emprestimo {
 		this.dataEmprestimo = dataEmprestimo;
 	}
 
-	/*utilize essas v�riaveis para calcular a data final de devolu��o*/
-        Date dataPrevista = new Date();
+	/*utilize essas váriaveis para calcular a data final de devolução*/
+    Date dataPrevista = new Date();
 	Date data_aux = new Date();
 	String nome;
 
-        /*Cada Emprestimo � composto de varios itens*/
+        /*Cada Emprestimo é composto de varios itens*/
 	List<Item> i = new ArrayList<Item>();
 	
-        //Metodo respons�vel por calcular a data de devolucao
-	public Date CalculaDataDevolucao()
-	{   
+        //Metodo responsável por calcular a data de devolucao
+	public Date CalculaDataDevolucao(){   
 		Date date = new Date();
 		
 		int tamanho = i.size();
@@ -48,7 +47,18 @@ public class Emprestimo {
 		} else {
 			dataPrevista = maior;
 		}
-
+		System.out.println(dataPrevista);
 		return dataPrevista;
 	}
+}
+
+
+@Test
+public void testCalculaDataDevolucao() {
+    //testa a data de devolução
+    Emprestimo emprestimo = new Emprestimo();
+    Date expected = new Date(System.currentTimeMillis() + (3 * (24 * 60 * 60 * 1000))); //3 dias depois
+
+    Date data = emprestimo.CalculaDataDevolucao();
+    assertEquals(expected, data);
 }
