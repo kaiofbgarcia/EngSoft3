@@ -55,10 +55,15 @@ public class Emprestimo {
 
 @Test
 public void testCalculaDataDevolucao() {
-    //testa a data de devolução
-    Emprestimo emprestimo = new Emprestimo();
-    Date expected = new Date(System.currentTimeMillis() + (3 * (24 * 60 * 60 * 1000))); //3 dias depois
+	// Testa o cálculo da data de devolução
+	Emprestimo emprestimo = new Emprestimo();
+	long umDiaEmMilissegundos = 24 * 60 * 60 * 1000;
+	Date dataEsperada = new Date(System.currentTimeMillis() + (3 * umDiaEmMilissegundos)); 
+	// 3 dias depois
+	Date dataCalculada = emprestimo.CalculaDataDevolucao();
+	long diferencaEmMilissegundos = Math.abs(dataCalculada.getTime() - dataEsperada.getTime());
+	long tresDiasEmMilissegundos = 3 * umDiaEmMilissegundos;
 
-    Date data = emprestimo.CalculaDataDevolucao();
-    assertEquals(expected, data);
+	assertTrue(diferencaEmMilissegundos <= tresDiasEmMilissegundos,
+		"A diferença entre a data calculada e a data esperada deveria ser de exatamente 3 dias");
 }

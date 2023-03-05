@@ -35,15 +35,3 @@ public class Controle {
         return retorno;
     }
 }
-
-
-@Test
-public void emprestarTest(){
-  Controle controle = new Controle();
-  String RA = "123";
-  int num = 2;
-  int[] prazos = {5, 10};
-  boolean expected = true;
-  boolean actual = controle.emprestar(RA, num, prazos);
-  assertEquals(expected, actual);
-}

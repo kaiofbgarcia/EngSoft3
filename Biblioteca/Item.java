@@ -46,13 +46,21 @@ public class Item {
 
 @Test
 public void testCalculaDataDevolucao() {
-  Date data = new Date();
-  Livro livro = new Livro(10, "Title");
-  Item item = new Item(livro);
-  Date dateDevolucao = item.calculaDataDevolucao(data);
-  Calendar calendar = Calendar.getInstance();
-  calendar.setTime(data);
-  calendar.add(Calendar.DAY_OF_MONTH, livro.verPrazo());
-  Date expectedResult = calendar.getTime();
-  assertEquals(expectedResult, dateDevolucao);
+	// Testa o cálculo da data de devolução de um item
+	Date dataAtual = new Date();
+	Livro livro = new Livro(10, "Title");
+	Item item = new Item(livro);
+
+	// Calcula a data de devolução esperada
+	Calendar calendar = Calendar.getInstance();
+	calendar.setTime(dataAtual);
+	int prazoDias = livro.verPrazo();
+	calendar.add(Calendar.DAY_OF_MONTH, prazoDias);
+	Date dataEsperada = calendar.getTime();
+
+	// Verifica se a data de devolução calculada é igual à data de devolução esperada
+	Date dataCalculada = item.calculaDataDevolucao(dataAtual);
+	String mensagem = String.format("A data de devolução calculada (%s) deveria ser igual à data de devolução esperada (%s)",
+	dataCalculada, dataEsperada);
+	assertEquals(dataEsperada, dataCalculada, mensagem);
 }
